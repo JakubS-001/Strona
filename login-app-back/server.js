@@ -41,3 +41,29 @@ app.get('/usersList', (req, res) => {
       res.send(result)
   })
 });
+
+const generateToken = () => {
+  let token = ''
+  for(let i = 0; i < 80; i++){
+    token += String.fromCharCode(0 + parseInt(Math.floor(Math.random() * (127 - 33 + 1) + 33)))
+  }
+  return token
+}
+
+app.post('/login', (req, res) => { 
+  const login = req.body.login
+  const pwd = req.body.pwd
+
+  const sqlQuery = "Select * from Users where Login like (?) and Password like (?)";
+
+  db.query(sqlQuery, [login, pwd], (err, result) => {
+    console.log(result)
+    if(err) res.send(err)
+    else if(result.length === 0) res.json({
+      auth: false,
+      token: null})
+    else res.json({
+      auth: true,
+      token: generateToken()})
+  })
+});
