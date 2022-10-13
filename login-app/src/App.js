@@ -1,9 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import ErrorPage from './components/ErrorPage';
 import LoginPage from './components/LoginPage';
-import Unauthorize from './components/Unauthorize';
+import { BrowserRouter, Route, Routes, Outlet, Navigate } from 'react-router-dom';
+import { getToken } from './utils/session'
 
 function App() {
   return (
@@ -11,9 +11,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Outlet />}>
             <Route path="" exac element={<LoginPage />} />
-            <Route path="HomePage" element={<HomePage />} />
-            <Route path="Unauthorize" element={<Unauthorize />} />
+            <Route exact path="HomePage" element={getToken() ? <HomePage /> : <Navigate to='/' replace />}/>
             <Route path="*" element={<ErrorPage />} />
+        </Route>
+        <Route path="HomePage" element={<Outlet />}>
+            <Route exact path="/" element={getToken() ? <HomePage /> : <Navigate to='HomePage' replace />}/>
         </Route>
       </Routes>
     </BrowserRouter>
