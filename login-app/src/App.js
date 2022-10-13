@@ -14,9 +14,6 @@ function App() {
             <Route exact path="HomePage" element={getToken() ? <HomePage /> : <Navigate to='/' replace />}/>
             <Route path="*" element={<ErrorPage />} />
         </Route>
-        <Route path="HomePage" element={<Outlet />}>
-            <Route exact path="/" element={getToken() ? <HomePage /> : <Navigate to='HomePage' replace />}/>
-        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -62,6 +62,12 @@ app.post('/login', (req, res) => {
     else if(result.length === 0) res.json({
       auth: false,
       token: null})
+    else if(login !== result[0].Login || pwd !== result[0].Password){
+      res.json({
+        auth: false,
+        token: null
+      })
+    }
     else res.json({
       auth: true,
       token: generateToken()})
