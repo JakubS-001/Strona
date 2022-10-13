@@ -10,10 +10,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Outlet />}>
-          <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/HomePage" element={<HomePage />} />
-          <Route path="/ErrorPage" element={<ErrorPage />} />
-          <Route path="/Unauthorize" element={<Unauthorize />} />
+            <Route path="" exac element={<LoginPage />} />
+            <Route path="HomePage" element={<HomePage />} />
+            <Route path="Unauthorize" element={<Unauthorize />} />
+            <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
